@@ -1,0 +1,42 @@
+.rowWrapper {
+  position: relative;
+}
+
+.bgLine {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  display: block;
+  height: 1px;
+  opacity: 0.16;
+  background: #000;
+  background-color: #f1caca;
+}
+
+.icon {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+.numberWithDot {
+  display: block;
+  color: #f42958;
+  font-size: 1rem;
+
+  &:before {
+    display: block;
+    height: 10px;
+    width: 10px;
+    margin: 0 auto 2.14286em;
+    content: '';
+    transform: translateX(-50%);
+    border-radius: 100px;
+    background: #f42958;
+  }
+}
+
+.text {
+  text-align: center;
+}
