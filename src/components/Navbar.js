@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'gatsby'
 import {
   Collapse,
   Navbar,
@@ -7,50 +7,85 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from 'reactstrap'
 
-export default class Example extends React.Component {
+import styles from './Navbar.module.scss'
+
+const navLinks = [
+  {
+    name: 'Home',
+    path: '/'
+  },
+  {
+    name: 'About',
+    path: '/about'
+  },
+  {
+    name: 'Our Work',
+    path: '/work'
+  },
+  {
+    name: 'Connect',
+    path: '/connect'
+  }
+]
+
+const dropDownLinks = [
+  { name: 'Login', path: '/login' },
+  { name: 'Register', path: '/register' }
+]
+
+class Navigation extends Component {
   constructor(props) {
     super(props)
-
-    this.toggle = this.toggle.bind(this)
     this.state = {
-      isOpen: false
+      isOpen: false // Is navbar open?
     }
   }
-  toggle() {
+
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
+
   render() {
+    const { isOpen } = this.state
+
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">Brobs</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/works">Works</NavLink>
-              </NavItem>
+              {navLinks.map((navLink, key) => {
+                const { name, path } = navLink
+                return (
+                  <NavItem key={key}>
+                    <Link className="nav-link" to={path}>
+                      {name}
+                    </Link>
+                  </NavItem>
+                )
+              })}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Dashboard
+                  Users
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Login</DropdownItem>
+                  {dropDownLinks.map((link, key) => {
+                    const { name, path } = link
+                    return (
+                      <DropdownItem key={key} className={styles.dropDownItem}>
+                        <Link to={path}>{name}</Link>
+                      </DropdownItem>
+                    )
+                  })}
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
@@ -60,3 +95,5 @@ export default class Example extends React.Component {
     )
   }
 }
+
+export default Navigation
