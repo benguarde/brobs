@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import {
+  Container,
   Collapse,
   Navbar,
   NavbarToggler,
@@ -57,8 +58,8 @@ class Navigation extends Component {
     const { isOpen } = this.state
 
     return (
-      <div>
-        <Navbar color="dark" dark expand="md">
+      <Navbar color="dark" dark expand="md" className={styles.Navbar}>
+        <Container>
           <NavbarBrand href="/">Brobs</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -90,8 +91,8 @@ class Navigation extends Component {
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
-        </Navbar>
-      </div>
+        </Container>
+      </Navbar>
     )
   }
 }
